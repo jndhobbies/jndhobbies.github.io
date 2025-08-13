@@ -1,7 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JND Pairings</title>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore-compat.js"></script>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages. Change</p>
+    <h1>Pokemon Tournament Pairings</h1>
+    <div id="pairings-container">Loading...</div>
+
+    <script>
+
+    
+        // Your Firebase config 
+        const firebaseConfig = {
+            apiKey: "AIzaSyB6CHwzuinVnEZn-qP-zJdc9ZKWwRcQ1Ms",
+            authDomain: "jndpokemonstandings.firebaseapp.com",
+            databaseURL: "https://jndpokemonstandings-default-rtdb.firebaseio.com",
+            projectId: "jndpokemonstandings",
+            storageBucket: "jndpokemonstandings.firebasestorage.app",
+            messagingSenderId: "804895009890",
+            appId: "1:804895009890:web:716b0174522624a6ccf53b",
+            measurementId: "G-0C7L4GFLDF"
+        };
+
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        // Initialize Cloud Firestore and get a reference to the service
+        const db = firebase.firestore();
+
+
+        db.collection("pairings").doc("uqfLMFj3bFK8rLjoqGrk")
+            .onSnapshot((doc) => {
+                const htmlString = doc.data().currentPairing;
+    
+                console.log(htmlString);
+                document.getElementById('pairings-container').innerHTML = htmlString;
+            }
+        );
+
+
+
+    </script>
 </body>
 </html>
